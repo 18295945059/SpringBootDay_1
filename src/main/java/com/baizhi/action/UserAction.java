@@ -1,4 +1,4 @@
-package com.baizhi.action;
+﻿package com.baizhi.action;
 
 import com.baizhi.entity.User;
 import com.baizhi.service.UserService;
@@ -19,6 +19,7 @@ public class UserAction {
     private UserService userService;
     
     //这是在github上进行的修改
+	//这是在本地上进行的修改
     //1.展示所有
     @RequestMapping("/show")
     @ResponseBody
