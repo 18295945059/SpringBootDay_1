@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.UserDao">
+    <insert id="inserts">
+        insert into g_user values (#{id},#{username},#{password},#{iphone},#{email},#{ip},#{position},#{source},#{status})
+    </insert>
+
+    <delete id="deleteByIDs">
+        delete  from  g_user where  id  in
+        <foreach collection="array" open="(" close=")" item="ids" separator=",">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <update id="update">
+        update g_user
+        <set>
+            <if test="id!=null">
+                id=#{id},
+            </if>
+            <if test="username!=null">
+                username=#{username},
+            </if>
+            <if test="password!=null">
+                password=#{password},
+            </if>
+            <if test="iphone!=null">
+                iphone=#{iphone},
+            </if>
+            <if test="email!=null">
+                email=#{email},
+            </if>
+            <if test="ip!=null">
+                ip=#{ip},
+            </if>
+            <if test="position!=null">
+                position=#{position},
+            </if>
+            <if test="source!=null">
+                source=#{source},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="delete">
+        delete from g_user where id=#{id}
+    </delete>
+
+    <select id="selectAll" resultType="User">
+        select * from g_user limit ${(page-1)*rows},#{rows}
+    </select>
+    <select id="selectOne" resultType="User">
+        select * from g_user where id=#{id}
+    </select>
+
+    <select id="sum" resultType="java.lang.Integer">
+        select count(*) from g_user
+    </select>
+    
+    <select id="selectlogin" resultType="User">
+        select * from g_user where username=#{username} and password=#{password}
+    </select>
+</mapper>
